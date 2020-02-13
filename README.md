@@ -11,7 +11,7 @@ Change to the working directory containing `bundle.hcl`.
 Run:
 
 ```sh
-docker run --rm -it -v $(pwd)/:/bundle/ terraform-bundler
+docker run --rm -it -v $(pwd)/:/bundle/ tstraub/terraform-bundler
 ```
 
 The resulting zip will be created in the working directory.
@@ -25,7 +25,7 @@ Change to the working directory containing `custom.hcl`.
 Run:
 
 ```sh
-docker run --rm -it -v $(pwd)/:/bundle/ -e "bundle_hcl=custom.hcl" terraform-bundler
+docker run --rm -it -v $(pwd)/:/bundle/ -e "bundle_hcl=custom.hcl" tstraub/terraform-bundler
 ```
 
 The resulting zip will be created in the working directory.
@@ -41,7 +41,7 @@ Create a subfolder called `plugins/` and place any provider binaries in that dir
 Run:
 
 ```sh
-docker run --rm -it -v $(pwd)/:/bundle/ terraform-bundler
+docker run --rm -it -v $(pwd)/:/bundle/ tstraub/terraform-bundler
 ```
 
 The process will pull from the `plugins/` first, then reaching out to the internet.
