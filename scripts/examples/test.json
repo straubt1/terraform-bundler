@@ -1,0 +1,23 @@
+{
+    "terraform": "0.12.24",
+    "providers": [{
+            "name": "azurerm",
+            "versions": [
+                "2.6.0"
+            ]
+        },
+        {
+            "name": "google",
+            "versions": [
+                "3.16.0",
+                "3.17.0"
+            ]
+        },
+        {
+            "name": "random",
+            "versions": [
+                "2.2.1"
+            ]
+        }
+    ]
+}
