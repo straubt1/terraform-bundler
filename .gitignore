@@ -1,3 +1,6 @@
 *.zip
 *_x4
 .terraform
+.DS_Store*
+
+venv/
