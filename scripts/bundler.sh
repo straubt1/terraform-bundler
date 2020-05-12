@@ -2,10 +2,9 @@
 
 set -e -u -o pipefail
 
-# settings_file=$1
-settings_file="./examples/test.json"
+settings_file=$1
+# settings_file="./examples/test.json"
 # Create tmp dir
-# tmp_dir="./tmp/2020.04.16-12.53.51"
 tmp_dir="./tmp/$(date "+%Y.%m.%d-%H.%M.%S")"
 tmp_dir=$(mktemp -d)
 mkdir -p ${tmp_dir}
