@@ -1,5 +1,5 @@
 {
-    "terraform": "0.12.24",
+    "terraform": "0.13.0-beta3",
     "providers": [{
             "name": "azurerm",
             "versions": [
