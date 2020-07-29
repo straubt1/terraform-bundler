@@ -2,25 +2,31 @@
 
 set -e -u -o pipefail
 
+[[ $# -eq 0 ]] && echo "Please Pass a Settings File Path" && exit 1
+
 settings_file=$1
 # settings_file="./examples/test.json"
+
 # Create tmp dir
-tmp_dir="./tmp/$(date "+%Y.%m.%d-%H.%M.%S")"
+# tmp_dir="./tmp/$(date "+%Y.%m.%d-%H.%M.%S")"
 tmp_dir=$(mktemp -d)
+working_dir=$(pwd)
 mkdir -p ${tmp_dir}
 
-
 download_provider(){
-  local provider_name=$1
-  local provider_version=$2
+  local provider_namespace=$1
+  local provider_name=$2
+  local provider_version=$3
 
-  echo "Downloading Terraform Provider ${provider_name}:${provider_version}"
+  echo "Downloading Terraform Provider ${provider_namespace}/${provider_name}:${provider_version}"
 
   provider_zip_url="https://releases.hashicorp.com/terraform-provider-${provider_name}/${provider_version}/terraform-provider-${provider_name}_${provider_version}_linux_amd64.zip"
   zip_file_name="${provider_name}-${provider_version}.zip"
-  # echo "  URL: ${provider_zip_url}"
   curl -so "${tmp_dir}/${zip_file_name}" ${provider_zip_url}
-  unzip -qd "${tmp_dir}" "${tmp_dir}/${zip_file_name}"
+
+  provider_path="${tmp_dir}/${provider_namespace}/${provider_name}/${provider_version}/linux_amd64"
+  mkdir -p ${provider_path}
+  unzip -qd "${provider_path}" "${tmp_dir}/${zip_file_name}"
 
   # Cleanup zip
   rm "${tmp_dir}/${zip_file_name}"
@@ -45,22 +51,27 @@ echo "Downloading Terraform ${tf_version}"
 curl -so "${tmp_dir}/terraform" ${tf_url}
 
 echo "Downloading Providers"
-for row in $(echo ${providers} | jq -r '.[] | [.name, .versions] | @base64'); do
-  _name() {
+for row in $(echo ${providers} | jq -r '.[] | [.namespace, .name, .versions] | @base64'); do
+  _namespace() {
     echo ${row} | base64 --decode | jq -r .[0]
   }
-  _versions() {
+  _name() {
     echo ${row} | base64 --decode | jq -r .[1]
+  }
+  _versions() {
+    echo ${row} | base64 --decode | jq -r .[2]
   }
 
   # echo $(_name) $(_versions)
   for version in $(_versions | jq -r .[]); do
+    ns=$(_namespace)
     n=$(_name)
     v=${version}
 
-    download_provider $n $v
+    download_provider $ns $n $v
   done
 done
 
-zip -qjr ${bundle_filename} ${tmp_dir}/*
+cd ${tmp_dir}
+zip -qr "${working_dir}/${bundle_filename}" *
 rm -rf ${tmp_dir}

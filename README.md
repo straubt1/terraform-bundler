@@ -1,59 +1,25 @@
-# terraform-bundler
+# Terraform Bundler
 
-Docker build to create Terraform bundles for Terraform Enterprise.
+For Terraform Enterprise to run in an airgapped environment it needs to be provided with Terraform provider binaries at run time since they can not be fetched over the internet.
 
-## [Example] Default
+There are several ways to accomplish this, but a common solution is to bundle the provider versions with Terraform core binary.
 
-Create a `bundle.hcl` file as documented [here](https://github.com/hashicorp/terraform/tree/master/tools/terraform-bundle#usage).
+## Docker
 
-Change to the working directory containing `bundle.hcl`.
+This method builds the 'terraform-bundle' binary based on a specified release of Terraform Core, then runs it based on a passed in configuration file to output a zip file.
 
-Run:
+Instructions [here](./docker/README.md)
 
-```sh
-docker run --rm -it -v $(pwd)/:/bundle/ tstraub/terraform-bundler
-```
+## Bash Terraform 0.12
 
-The resulting zip will be created in the working directory.
+This method build a zip file using bash, the zip file is specific to Terraform 0.12 or earlier.
 
-## [Example] Using Custom bundle file
+Instructions [here](./bash-0.12/README.md)
 
-Create a `custom.hcl` file.
+## Bash Terraform 0.13
 
-Change to the working directory containing `custom.hcl`.
+This method build a zip file using bash, the zip file is specific to Terraform 0.13.
 
-Run:
+> Note: This method is still experimental while waiting for the official release of Terraform 0.13
 
-```sh
-docker run --rm -it -v $(pwd)/:/bundle/ -e "bundle_hcl=custom.hcl" tstraub/terraform-bundler
-```
-
-The resulting zip will be created in the working directory.
-
-## [Example] Using Custom providers
-
-Create a `bundle.hcl` file.
-
-Change to the working directory containing `bundle.hcl`.
-
-Create a subfolder called `plugins/` and place any provider binaries in that directory.
-
-Run:
-
-```sh
-docker run --rm -it -v $(pwd)/:/bundle/ tstraub/terraform-bundler
-```
-
-The process will pull from the `plugins/` first, then reaching out to the internet.
-The resulting zip will be created in the working directory.
-
-
-## Docker Build
-
-```sh
-# Build docker locally
-docker build -t terraform-bundler .
-
-# Run container and bash in to test
-docker run --rm -it terraform-bundler bash
-```
+Instructions [here](./bash-0.13/README.md)
