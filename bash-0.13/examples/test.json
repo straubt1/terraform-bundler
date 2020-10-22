@@ -1,14 +1,7 @@
 {
-    "terraform": "0.13.0-rc1",
+    "terraform": "0.13.2",
     "providers": [{
             "namespace": "hashicorp",
-            "name": "azurerm",
-            "versions": [
-                "2.6.0"
-            ]
-        },
-        {
-            "namespace": "terraform-providers",
             "name": "acme",
             "versions": [
                 "1.5.0"
@@ -16,10 +9,16 @@
         },
         {
             "namespace": "hashicorp",
-            "name": "google",
+            "name": "random",
             "versions": [
-                "3.16.0",
-                "3.17.0"
+                "2.3.0"
+            ]
+        },
+        {
+            "namespace": "hashicorp",
+            "name": "aws",
+            "versions": [
+                "3.11.0"
             ]
         }
     ]

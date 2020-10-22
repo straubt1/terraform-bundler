@@ -5,22 +5,28 @@ Create a zip file that matches the provider namespace schema.
 Example:
 
 ```
-├── terraform
-├── hashicorp
-│   ├── azurerm
-│   │   └── 2.6.0
-│   │       └── linux_amd64
-│   │           └── terraform-provider-azurerm_v2.6.0_x5
-│   └── google
-│       ├── 3.16.0
-│       │   └── linux_amd64
-│       │       └── terraform-provider-google_v3.16.0_x5
-│       └── 3.17.0
-│           └── linux_amd64
-│               └── terraform-provider-google_v3.17.0_x5
-└── terraform-providers
-    └── acme
-        └── 1.5.0
-            └── linux_amd64
-                └── terraform-provider-acme_v1.5.0_x4
+├── plugins
+│   └── registry.terraform.io
+│       ├── getstackhead
+│       │   └── acme
+│       │       └── 1.5.0-patched
+│       │           └── linux_amd64
+│       │               ├── CHANGELOG.md
+│       │               ├── LICENSE
+│       │               ├── README.md
+│       │               └── terraform-provider-acme_v1.5.0-patched
+│       └── hashicorp
+│           ├── aws
+│           │   └── 3.11.0
+│           │       └── linux_amd64
+│           │           └── terraform-provider-aws_v3.11.0_x5
+│           ├── azurerm
+│           │   └── 1.43.0
+│           │       └── linux_amd64
+│           │           └── terraform-provider-azurerm_v1.43.0_x4
+│           └── random
+│               └── 2.3.0
+│                   └── linux_amd64
+│                       └── terraform-provider-random_v2.3.0_x4
+└── terraform
 ```

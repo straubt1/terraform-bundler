@@ -1,10 +1,19 @@
 terraform {
-  version = "0.12.24"
+  version = "0.13.2"
 }
 
 providers {
-  azurerm = ["1.43.0"]
-  google = ["~> 3.0"]
-  google-beta = ["~> 3.0"]
-  random = ["~> 2.2"]
+  aws = {
+    versions = ["~> 3.11.0"]
+  }
+  azurerm = {
+    versions = ["1.43.0"]
+  }
+  random = {
+    versions = ["~> 2.2"]
+  }
+  acme = {
+    versions = ["1.5.0-patched"]
+    source = "registry.terraform.io/getstackhead/acme"
+  }
 }

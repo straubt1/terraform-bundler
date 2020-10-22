@@ -1,6 +1,6 @@
-FROM golang:1.12.13 as gostage
+FROM golang:1.14.10 as gostage
 LABEL maintainer="tstraub@hashicorp.com"
-ARG terraform_core_version=v0.12.24
+ARG terraform_core_version=v0.13.4
 
 RUN git clone --branch ${terraform_core_version} --depth 1 https://github.com/hashicorp/terraform.git
 RUN cd terraform && go install ./tools/terraform-bundle

@@ -43,7 +43,9 @@ echo
 
 tf_url="https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip"
 echo "Downloading Terraform ${tf_version}"
-curl -so "${tmp_dir}/terraform" ${tf_url}
+curl -so "${tmp_dir}/terraform.zip" ${tf_url}
+unzip -d "${tmp_dir}" "${tmp_dir}/terraform.zip"
+rm "${tmp_dir}/terraform.zip"
 
 echo "Downloading Providers"
 for row in $(echo ${providers} | jq -r '.[] | [.name, .versions] | @base64'); do

@@ -7,3 +7,4 @@ venv/
 notes.md
 sandbox*/
 tmp/
+*.zip
