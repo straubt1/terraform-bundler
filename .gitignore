@@ -8,3 +8,5 @@ notes.md
 sandbox*/
 tmp/
 *.zip
+clients/
+plugins/

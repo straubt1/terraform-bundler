@@ -22,6 +22,7 @@ download_provider(){
 
   provider_zip_url="https://releases.hashicorp.com/terraform-provider-${provider_name}/${provider_version}/terraform-provider-${provider_name}_${provider_version}_linux_amd64.zip"
   zip_file_name="${provider_name}-${provider_version}.zip"
+  echo "Provider URL: ${provider_zip_url}"
   curl -so "${tmp_dir}/${zip_file_name}" ${provider_zip_url}
   
   provider_path="${tmp_dir}/plugins/registry.terraform.io/hashicorp/${provider_name}/${provider_version}/linux_amd64"
