@@ -11,9 +11,6 @@ Example:
 │       │   └── acme
 │       │       └── 1.5.0-patched
 │       │           └── linux_amd64
-│       │               ├── CHANGELOG.md
-│       │               ├── LICENSE
-│       │               ├── README.md
 │       │               └── terraform-provider-acme_v1.5.0-patched
 │       └── hashicorp
 │           ├── aws
