@@ -1,0 +1,15 @@
+FROM golang:1.14.10 as gostage
+LABEL maintainer="tstraub@hashicorp.com"
+ARG terraform_core_version=v0.13.5
+
+RUN git clone --branch ${terraform_core_version} --depth 1 https://github.com/hashicorp/terraform.git
+RUN cd terraform && go install ./tools/terraform-bundle
+# build file in /go/bin/terraform-bundle
+
+FROM centos:latest
+ENV bundle_hcl=bundle.hcl
+
+COPY --from=gostage /go/bin/terraform-bundle /usr/local/bin/terraform-bundle
+
+WORKDIR /bundle
+CMD terraform-bundle package ${bundle_hcl}
